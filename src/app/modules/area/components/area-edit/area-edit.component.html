@@ -1,0 +1,55 @@
+<h2>Area Edit</h2>
+
+<form [formGroup]="areaEditForm" (submit)="onSubmit($event)" class="area-edit__form" novalidate>
+  <div class="row mb-3">
+    <div class="col-3">
+      <label for="id">Id</label>
+      <input type="text" id="id" formControlName="id" class="form-control" readonly /> 
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <label for="name">Name</label>
+      <input type="text" id="name" formControlName="name" [ngClass]="{'area-edit__field-error': isControlInvalid('name')}"
+        class="form-control" autocomplete="off" placeholder="Input name..." />
+
+        <div *ngIf="isControlInvalid('name')">
+          <div *ngIf="areaEditForm.controls['name'].errors.required" class="area-edit__error">
+            Name is required.
+          </div>
+          <div *ngIf="areaEditForm.controls['name'].errors.maxlength" class="area-edit__error">
+            Name must be no more than 200 characters.
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-3">
+      <label for="createdById">CreatedById</label>
+      <input type="text" id="createdById" formControlName="createdById" class="form-control" readonly /> 
+    </div>
+    <div class="col-5">
+      <label for="createdOn">CreatedOn</label>
+      <input type="text" id="createdOn" formControlName="createdOn" class="form-control" readonly /> 
+    </div>
+  </div>
+  <div class="row mb-4">
+    <div class="col-3">
+      <label for="updatedById">UpdatedById</label>
+      <input type="text" id="updatedById" formControlName="updatedById" class="form-control" readonly /> 
+    </div>
+    <div class="col-5">
+      <label for="updatedOn">UpdatedOn</label>
+      <input type="text" id="updatedOn" formControlName="updatedOn" class="form-control" readonly /> 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div *ngIf="errors" class="alert alert-danger" role="alert">
+        {{errors.message}}
+      </div>
+
+      <input type="submit" value="Save" class="btn btn-primary btn-lg">
+    </div>
+  </div>
+</form>
