@@ -12,6 +12,9 @@ import { Area } from 'src/app/shared/models/area';
 })
 export class AreaEditComponent implements OnInit {
 
+  breadcombTitle = "Редактирование торговой площади";
+  breadcombText = "Все поля формы обязательны для заполнения";
+
   areaId: number;
   area: Area;
 
@@ -45,10 +48,7 @@ export class AreaEditComponent implements OnInit {
       .group({
         id: [null],
         name: [null, [Validators.required, Validators.maxLength(200)]],
-        createdOn: [null],
-        createdById: [null],
-        updatedOn: [null],
-        updatedById: [null]
+        address: [null, [Validators.required, Validators.maxLength(250)]]
       });
   }
 
@@ -56,12 +56,7 @@ export class AreaEditComponent implements OnInit {
     this.areaEditForm.patchValue({
       id: this.area.id,
       name: this.area.name,
-      createdOn: this.area.createdOn !== null
-        ? this.area.createdOn.toLocaleString() : '',
-      createdById: this.area.createdById,
-      updatedOn: this.area.updatedOn !== null
-        ? this.area.updatedOn.toLocaleString() : '',
-      updatedById: this.area.updatedById
+      address: this.area.address
     });
   }
 

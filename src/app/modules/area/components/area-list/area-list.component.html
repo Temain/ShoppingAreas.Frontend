@@ -1,42 +1,74 @@
-<h2>Areas List</h2>
+<app-breadcomb [title]="breadcombTitle" [text]="breadcombText"></app-breadcomb>
 
-<div class="mb-2 mt-2">
-   <a href="#" [routerLink]="['/areas/create']" class="btn btn-primary btn-lg">Create</a>
+<!-- <div class="mb-2 mt-2">
+    <a href="#" [routerLink]="['/areas/create']" class="btn btn-primary btn-lg">Create</a>
+</div> -->
+
+<div class="animation-area">
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let area of areas; let i = index" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <div class="animation-single-int">
+          <div class="animation-ctn-hd">
+            <h2>{{ area.name }}</h2>
+            <p>{{ area.address }}</p>
+          </div>
+          <div class="animation-img mg-b-15">
+            <img class="animate-one" src="/assets/img/widgets/2.png" alt="" />
+          </div>
+          <div class="animation-action">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="animation-btn">
+                  <a [routerLink]="['/areas', area.id]" class="btn full-width ant-nk-st waves-effect">Изменить</a>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="animation-btn sm-res-mg-t-10 tb-res-mg-t-10 dk-res-mg-t-10">
+                  <button (click)="confirmDelete(content, area.id)" class="btn btn-danger notika-btn-danger full-width waves-effect">Удалить</button>
+                </div>
+              </div>
+            </div>
+            <div class="row mg-t-10">
+              <div class="col-lg-6">
+                <div class="animation-btn">
+                  <button class="btn btn-warning notika-btn-warning full-width waves-effect">Обрудование</button>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="animation-btn sm-res-mg-t-10 tb-res-mg-t-10 dk-res-mg-t-10">
+                  <button class="btn btn-info notika-btn-info full-width waves-effect">Товары</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th class="col-4">Name</th>
-      <th class="col-3">CreatedOn</th>
-      <th class="col-1">CreatedById</th>
-      <th class="col-3">UpdatedOn</th>
-      <th class="col-1">UpdatedById</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let area of areas; let i = index">
-      <td>{{ area.id }}</td>
-      <td>{{ area.name }}</td>
-      <td>{{ area.createdOn | date:'medium' }}</td>
-      <td>{{ area.createdById }}</td>
-      <td>{{ area.updatedOn | date:'medium' }}</td>
-      <td>{{ area.updatedById }}</td>
-      <td>
-        <div>
-          <a href="#" [routerLink]="['/areas', area.id]">Edit</a>
-        </div>
-        <div>
-          <a href="#" (click)="confirmDelete(content, area.id)">Delete</a>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<ng-template #content let-modal class="modal" role="dialog">
+  <div class="modal-dialog modals-default nk-red">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-confirm-title">Подтверждение</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Вы действительно хотите удалить торговую площадь?</strong></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" (click)="modal.dismiss('Cancel click')">Нет</button>
+        <button type="button" class="btn btn-default waves-effect" (click)="modal.close('Ok click')">Да</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
 
-<ng-template #content let-modal>
+<!-- <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-confirm-title">Confirm delete</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -50,4 +82,4 @@
     <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cancel click')">Cancel</button>
     <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Ok</button>
   </div>
-</ng-template>
+</ng-template> -->

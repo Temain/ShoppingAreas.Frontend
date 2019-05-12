@@ -4,6 +4,9 @@ import { AreaComponent } from './pages/area.component';
 import { AreaRouter } from './area-routing.module'
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { SharedModule } from 'src/app/shared/modules/shared.module';
+import { AuthGuard } from 'src/app/auth.guard';
+
 import { AreaListComponent } from './components/area-list/area-list.component';
 import { AreaEditComponent } from './components/area-edit/area-edit.component';
 import { AreaCreateComponent } from './components/area-create/area-create.component';
@@ -13,7 +16,9 @@ import { AreaCreateComponent } from './components/area-create/area-create.compon
   imports: [
     CommonModule,
     AreaRouter,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    SharedModule
+  ],
+  providers: [AuthGuard]
 })
 export class AreaModule { }

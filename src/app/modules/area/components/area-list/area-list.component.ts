@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 import { AreaService } from 'src/app/shared/services/area.service';
@@ -10,12 +10,15 @@ import { Area } from 'src/app/shared/models/area';
   styleUrls: ['./area-list.component.scss']
 })
 export class AreaListComponent implements OnInit {
+  breadcombTitle = "Торговые площади";
+  breadcombText = "Список торговых площадей для оценки эффективности использования";
   areas: Area[];
   deleteResult: string;
 
   constructor(
     private areaService: AreaService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal
+  ) { }
 
   ngOnInit() {
     this.areaService.getAreas()

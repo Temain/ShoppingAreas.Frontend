@@ -12,6 +12,9 @@ import { Area } from 'src/app/shared/models/area';
 })
 export class AreaCreateComponent implements OnInit {
 
+  breadcombTitle = "Новая торговая площадь";
+  breadcombText = "Все поля формы обязательны для заполнения";
+
   area: Area;
   areaCreateForm: FormGroup;
   errors = '';
@@ -29,7 +32,8 @@ export class AreaCreateComponent implements OnInit {
   initForm() {
     this.areaCreateForm = this.formBuilder
       .group({
-        name: [null, [Validators.required, Validators.maxLength(200)]]
+        name: [null, [Validators.required, Validators.maxLength(200)]],
+        address: [null, [Validators.required, Validators.maxLength(250)]]
       });
   }
 
@@ -53,11 +57,13 @@ export class AreaCreateComponent implements OnInit {
     /** Обработка данных формы */
     this.area = new Area();
     this.area.name = this.areaCreateForm.controls.name.value;
+    this.area.address = this.areaCreateForm.controls.address.value;
 
     this.areaService.createArea(this.area)
       .subscribe(_ => {
         this.router.navigate(['/areas']);
       }, response => {
+        debugger
         this.errors = response.error;
         throw response;
       });

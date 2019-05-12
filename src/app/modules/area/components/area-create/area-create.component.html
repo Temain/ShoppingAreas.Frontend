@@ -1,29 +1,54 @@
-<h2>Area Create</h2>
+<app-breadcomb [title]="breadcombTitle" [text]="breadcombText"></app-breadcomb>
 
-<form [formGroup]="areaCreateForm" (submit)="onSubmit($event)" class="area-create__form" novalidate>
-  <div class="row mb-3">
-    <div class="col-12">
-      <label for="name">Name</label>
-      <input type="text" id="name" formControlName="name" [ngClass]="{'area-create__field-error': isControlInvalid('name')}"
-        class="form-control" autocomplete="off" placeholder="Input name..." />
-
-        <div *ngIf="isControlInvalid('name')">
-          <div *ngIf="areaCreateForm.controls['name'].errors.required" class="area-create__error">
-            Name is required.
-          </div>
-          <div *ngIf="areaCreateForm.controls['name'].errors.maxlength" class="area-create__error">
-            Name must be no more than 200 characters.
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <form [formGroup]="areaCreateForm" (submit)="onSubmit($event)" class="form-example-wrap area-create__form"
+        novalidate>
+        <div class="form-example-int">
+          <div class="form-group">
+            <label>Наименование</label>
+            <div class="nk-int-st">
+              <input type="text" id="name" formControlName="name"
+                [ngClass]="{'area-create__field-error': isControlInvalid('name')}" class="form-control"
+                autocomplete="off" placeholder="Введите наименование..." />
+              <div *ngIf="isControlInvalid('name')">
+                <div *ngIf="areaCreateForm.controls['name'].errors.required" class="area-create__error">
+                  Наименование обязательно для заполнения.
+                </div>
+                <div *ngIf="areaCreateForm.controls['name'].errors.maxlength" class="area-create__error">
+                  Наименование должно быть длинной не более 200 символов.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <div *ngIf="errors" class="alert alert-danger" role="alert">
-        {{errors.message}}
-      </div>
+        <div class="form-example-int">
+          <div class="form-group">
+            <label>Адрес</label>
+            <div class="nk-int-st">
+              <input type="text" id="address" formControlName="address"
+                [ngClass]="{'area-create__field-error': isControlInvalid('address')}" class="form-control"
+                autocomplete="off" placeholder="Введите наименование..." />
+              <div *ngIf="isControlInvalid('address')">
+                <div *ngIf="areaCreateForm.controls['address'].errors.required" class="area-create__error">
+                  Адрес обязателен для заполнения.
+                </div>
+                <div *ngIf="areaCreateForm.controls['address'].errors.maxlength" class="area-create__error">
+                  Адрес должен быть длинной не более 200 символов.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-example-int mg-t-15">
+          <div *ngIf="errors" class="alert alert-danger" role="alert">
+            {{errors.message}}
+          </div>
 
-      <input type="submit" value="Save" class="btn btn-primary btn-lg">
+          <input type="submit" value="Добавить" class="btn btn-success btn-lg notika-btn-success waves-effect">
+        </div>
+      </form>
     </div>
   </div>
-</form>
+</div>

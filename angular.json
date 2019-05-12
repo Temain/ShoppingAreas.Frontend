@@ -28,9 +28,23 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/notika-custom-icon.css",
+              "src/assets/css/meanmenu/meanmenu.min.css",
+              "src/assets/css/normalize.css",
+              "src/assets/css/main.css",
+              "src/assets/css/style.css",
+              "src/assets/css/responsive.css",
+              "src/assets/css/wave/button.css",
+              "src/assets/css/wave/waves.min.css",
+              "src/assets/css/animation-custom.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "src/assets/js/wave/waves.min.js",
+              "src/assets/js/wave/wave-active.js",
+              "src/assets/js/main.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -86,9 +100,23 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": [
               "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/notika-custom-icon.css",
+              "src/assets/css/meanmenu/meanmenu.min.css",
+              "src/assets/css/normalize.css",
+              "src/assets/css/main.css",
+              "src/assets/css/style.css",
+              "src/assets/css/responsive.css",
+              "src/assets/css/wave/button.css",
+              "src/assets/css/wave/waves.min.css",
+              "src/assets/css/animation-custom.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "src/assets/js/wave/waves.min.js",
+              "src/assets/js/wave/wave-active.js",
+              "src/assets/js/main.js"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"

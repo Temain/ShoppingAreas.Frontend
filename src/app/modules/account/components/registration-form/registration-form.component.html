@@ -1,0 +1,107 @@
+<div id="breadcrumb-container">
+  <div class="container">
+    <ul class="breadcrumb">
+      <li>
+        <a href="#">Главная</a>
+      </li>
+      <li class="active">Регистрация</li>
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <header class="content-title">
+        <h1 class="title">Зарегистрироваться</h1>
+        <p class="title-desc">Если у Вас уже есть учетная запись, пожалуйста, выполните
+          <a href="#" routerLink="/login">вход</a>.</p>
+      </header>
+      <div class="xs-margin"></div>
+      <!-- space -->
+      <form id="register-form" #f="ngForm" novalidate (ngSubmit)="registerUser(f)">
+        <div class="row">
+
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <fieldset class="registration-form__fieldset-last">
+              <h2 class="sub-title">Общая информация</h2>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="input-icon input-icon-user"></span>
+                  <span class="input-text">Фамилия&#42;</span>
+                </span>
+                <input type="text" required name="lastName" ngModel class="form-control input-lg" placeholder="Введите фамилию...">
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="input-icon input-icon-user"></span>
+                  <span class="input-text">Имя&#42;</span>
+                </span>
+                <input type="text" required name="firstName" tmFocus ngModel class="form-control input-lg" placeholder="Введите имя...">
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="input-icon input-icon-user"></span>
+                  <span class="input-text">Логин&#42;</span>
+                </span>
+                <input type="text" required name="userName" ngModel class="form-control input-lg" placeholder="Введите логин...">
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="input-icon input-icon-email"></span>
+                  <span class="input-text">Эл. почта&#42;</span>
+                </span>
+                <input type="text" required ngModel name="email" #email="ngModel" class="form-control input-lg" placeholder="Введите адрес эл. почты...">
+                <small [hidden]="email.valid || (email.pristine && !submitted)" class="text-danger">Пожалейства, введите корректный адрес эл. почты</small>
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="input-icon input-icon-phone"></span>
+                  <span class="input-text">Телефон&#42;</span>
+                </span>
+                <input type="text" name="phoneNumber" ngModel class="form-control input-lg" placeholder="Введите номер телефона...">
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <fieldset>
+              <h2 class="sub-title">Ваш пароль</h2>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="input-icon input-icon-password"></span>
+                  <span class="input-text">Пароль&#42;</span>
+                </span>
+                <input type="password" required name="password" ngModel class="form-control input-lg" placeholder="Введите пароль...">
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="input-icon input-icon-password"></span>
+                  <span class="input-text">Повтор&#42;</span>
+                </span>
+                <input type="password" required class="form-control input-lg" placeholder="Введите подтверждение пароля...">
+              </div>
+            </fieldset>
+
+            <!-- <app-spinner [isRunning]="isRequesting"></app-spinner>
+            <input type="submit" [disabled]="f.invalid || isRequesting" value="Зарегистрироваться" class="btn btn-custom-2 md-margin"> -->
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div *ngIf="errors" class="alert alert-danger" role="alert">
+              {{errors}}
+            </div>
+
+            <!-- <app-spinner [isRunning]="isRequesting"></app-spinner> -->
+            <input type="submit" [disabled]="f.invalid || isRequesting" value="Зарегистрироваться" class="btn btn-custom-2 md-margin">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

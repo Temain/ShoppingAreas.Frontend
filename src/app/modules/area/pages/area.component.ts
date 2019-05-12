@@ -6,10 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./area.component.scss']
 })
 export class AreaComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit() {
   }
-
 }
