@@ -13,8 +13,8 @@ const routes: Routes = [
     component: AreaComponent,
     children: [
       { path: '', component: AreaListComponent },
-      { path: 'areas/create', component: AreaCreateComponent },
-      { path: 'areas/:id', component: AreaEditComponent }
+      { path: 'create', component: AreaCreateComponent },
+      { path: ':id', component: AreaEditComponent }
     ],
     canActivate: [AuthGuard]
   },

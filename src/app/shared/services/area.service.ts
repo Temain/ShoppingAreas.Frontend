@@ -23,7 +23,6 @@ export class AreaService extends BaseService {
       if (searchPattern) {
         params = params.set('searchPattern', searchPattern);
       }
-
       return this.http.get<Area[]>(this.apiUri + '/areas', { params });
     }
 
