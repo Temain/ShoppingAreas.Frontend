@@ -5,6 +5,7 @@ import { EquipmentRouter } from './equipment-routing.module'
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from 'src/app/shared/modules/shared.module';
+import { EquipmentServiceModule } from 'src/app/shared/modules/equipment-service.module';
 import { AuthGuard } from 'src/app/auth.guard';
 
 import { EquipmentListComponent } from './components/equipment-list/equipment-list.component';
@@ -17,7 +18,8 @@ import { EquipmentCreateComponent } from './components/equipment-create/equipmen
     CommonModule,
     EquipmentRouter,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    EquipmentServiceModule
   ],
   providers: [AuthGuard]
 })

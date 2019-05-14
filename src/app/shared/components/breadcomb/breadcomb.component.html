@@ -7,7 +7,7 @@
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 								<div class="breadcomb-wp">
 									<div class="breadcomb-icon">
-										<i class="notika-icon notika-mail"></i>
+										<i [ngClass]="iconClass" class="notika-icon"></i>
 									</div>
 									<div class="breadcomb-ctn">
 										<h2>{{ title }}</h2>
@@ -16,8 +16,8 @@
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
-								<div class="breadcomb-report">
-									<button data-toggle="tooltip" data-placement="left" title="Download Report" class="btn"><i class="notika-icon notika-sent"></i></button>
+								<div *ngIf="showCreate" class="breadcomb-report">
+                  <a [routerLink]="[url, 'create']" data-toggle="tooltip" data-placement="left" title="Добавить" class="btn waves-effect">Добавить</a>
 								</div>
 							</div>
 						</div>

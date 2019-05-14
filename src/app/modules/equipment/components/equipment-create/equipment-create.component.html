@@ -1,22 +1,22 @@
-<app-breadcomb [title]="breadcombTitle" [text]="breadcombText"></app-breadcomb>
+<app-breadcomb></app-breadcomb>
 
 <div class="container">
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <form [formGroup]="areaCreateForm" (submit)="onSubmit($event)" class="form-example-wrap area-create__form"
+      <form [formGroup]="equipmentCreateForm" (submit)="onSubmit($event)" class="form-example-wrap"
         novalidate>
         <div class="form-example-int">
           <div class="form-group">
             <label>Наименование</label>
             <div class="nk-int-st">
               <input type="text" id="name" formControlName="name"
-                [ngClass]="{'area-create__field-error': isControlInvalid('name')}" class="form-control"
+                [ngClass]="{'form__field-error': isControlInvalid('name')}" class="form-control"
                 autocomplete="off" placeholder="Введите наименование..." />
               <div *ngIf="isControlInvalid('name')">
-                <div *ngIf="areaCreateForm.controls['name'].errors.required" class="area-create__error">
+                <div *ngIf="areaCreateForm.controls['name'].errors.required" class="form__error-text">
                   Наименование обязательно для заполнения.
                 </div>
-                <div *ngIf="areaCreateForm.controls['name'].errors.maxlength" class="area-create__error">
+                <div *ngIf="areaCreateForm.controls['name'].errors.maxlength" class="form__error-text">
                   Наименование должно быть длинной не более 200 символов.
                 </div>
               </div>
@@ -25,17 +25,29 @@
         </div>
         <div class="form-example-int">
           <div class="form-group">
-            <label>Адрес</label>
+            <label>Ширина</label>
             <div class="nk-int-st">
-              <input type="text" id="address" formControlName="address"
-                [ngClass]="{'area-create__field-error': isControlInvalid('address')}" class="form-control"
+              <input type="text" id="length" formControlName="length"
+                [ngClass]="{'form__field-error': isControlInvalid('length')}" class="form-control"
                 autocomplete="off" placeholder="Введите наименование..." />
-              <div *ngIf="isControlInvalid('address')">
-                <div *ngIf="areaCreateForm.controls['address'].errors.required" class="area-create__error">
-                  Адрес обязателен для заполнения.
+              <div *ngIf="isControlInvalid('length')">
+                <div *ngIf="areaCreateForm.controls['length'].errors.required" class="form__error-text">
+                  Ширина обязательна для заполнения.
                 </div>
-                <div *ngIf="areaCreateForm.controls['address'].errors.maxlength" class="area-create__error">
-                  Адрес должен быть длинной не более 200 символов.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-example-int">
+          <div class="form-group">
+            <label>Длинна</label>
+            <div class="nk-int-st">
+              <input type="number" id="width" formControlName="width"
+                [ngClass]="{'form__field-error': isControlInvalid('width')}" class="form-control"
+                autocomplete="off" placeholder="Введите наименование..." />
+              <div *ngIf="isControlInvalid('width')">
+                <div *ngIf="areaCreateForm.controls['width'].errors.required" class="form__error-text">
+                  Длинна обязательна для заполнения.
                 </div>
               </div>
             </div>

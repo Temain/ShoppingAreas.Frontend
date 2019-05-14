@@ -11,10 +11,6 @@ import { Area } from 'src/app/shared/models/area';
   styleUrls: ['./area-create.component.scss']
 })
 export class AreaCreateComponent implements OnInit {
-
-  breadcombTitle = "Новая торговая площадь";
-  breadcombText = "Все поля формы обязательны для заполнения";
-
   area: Area;
   areaCreateForm: FormGroup;
   errors = '';

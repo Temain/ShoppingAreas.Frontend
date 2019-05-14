@@ -5,10 +5,11 @@ const routes: Routes = [
   { path: '', redirectTo: '/areas', pathMatch: 'full' },
   { path: 'areas', loadChildren: './modules/area/area.module#AreaModule' },
   { path: 'equipments', loadChildren: './modules/equipment/equipment.module#EquipmentModule' },
-  { path: 'account', loadChildren: './modules/account/account.module#AccountModule' },
+  { path: 'products', loadChildren: './modules/product/product.module#ProductModule' },
+  { path: '', loadChildren: './modules/account/account.module#AccountModule' },
 
   // otherwise redirect
-  { path: '**', redirectTo: '/' }
+  { path: '**', redirectTo: '/areas' }
 ];
 
 @NgModule({

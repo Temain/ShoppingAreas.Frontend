@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { AreaService } from 'src/app/shared/services/area.service';
-import { Area } from 'src/app/shared/models/area';
+import { EquipmentService } from 'src/app/shared/services/equipment.service';
+import { Equipment } from 'src/app/shared/models/equipment';
 
 @Component({
   selector: 'app-equipment-edit',
@@ -11,78 +11,76 @@ import { Area } from 'src/app/shared/models/area';
   styleUrls: ['./equipment-edit.component.scss']
 })
 export class EquipmentEditComponent implements OnInit {
+  equipmentId: number;
+  equipment: Equipment;
 
-  breadcombTitle = "Редактирование торговой площади";
-  breadcombText = "Все поля формы обязательны для заполнения";
-
-  areaId: number;
-  area: Area;
-
-  areaEditForm: FormGroup;
+  equipmentEditForm: FormGroup;
   errors = '';
 
   constructor(
-    private areaService: AreaService,
+    private equipmentService: EquipmentService,
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder) {
 
     this.route.params.subscribe(params => {
-      this.areaId = params.id;
+      this.equipmentId = params.id;
     });
   }
 
   ngOnInit() {
     this.initForm();
 
-    this.areaService.getArea(this.areaId)
+    this.equipmentService.getEquipment(this.equipmentId)
       .subscribe(response => {
-        this.area = response;
+        this.equipment = response;
 
         this.setValues();
       });
   }
 
   initForm() {
-    this.areaEditForm = this.formBuilder
+    this.equipmentEditForm = this.formBuilder
       .group({
         id: [null],
         name: [null, [Validators.required, Validators.maxLength(200)]],
-        address: [null, [Validators.required, Validators.maxLength(250)]]
+        length: [null, [Validators.required]],
+        width: [null, [Validators.required]]
       });
   }
 
   setValues() {
-    this.areaEditForm.patchValue({
-      id: this.area.id,
-      name: this.area.name,
-      address: this.area.address
+    this.equipmentEditForm.patchValue({
+      id: this.equipment.id,
+      name: this.equipment.name,
+      length: this.equipment.length,
+      width: this.equipment.width
     });
   }
 
   isControlInvalid(controlName: string): boolean {
-    const control = this.areaEditForm.controls[controlName];
+    const control = this.equipmentEditForm.controls[controlName];
     const result = control.invalid && control.touched;
     return result;
   }
 
   onSubmit(event: Event) {
     event.preventDefault();
-    const controls = this.areaEditForm.controls;
+    const controls = this.equipmentEditForm.controls;
 
     // Validation
-    if (this.areaEditForm.invalid) {
+    if (this.equipmentEditForm.invalid) {
       Object.keys(controls)
         .forEach(controlName => controls[controlName].markAsTouched());
       return;
     }
 
     /** Обработка данных формы */
-    this.area.name = this.areaEditForm.controls.name.value;
+    this.equipment.name = this.equipmentEditForm.controls.name.value;
 
-    this.areaService.editArea(this.area)
+    this.equipmentService.editEquipment(this.equipment)
       .subscribe(_ => {
-        this.router.navigate(['/areas']);
+        this.router.navigate(['/equipments']);
       }, response => {
         this.errors = response.error;
         throw response;

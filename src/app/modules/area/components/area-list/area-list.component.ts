@@ -10,8 +10,6 @@ import { Area } from 'src/app/shared/models/area';
   styleUrls: ['./area-list.component.scss']
 })
 export class AreaListComponent implements OnInit {
-  breadcombTitle = "Торговые площади";
-  breadcombText = "Список торговых площадей для оценки эффективности использования";
   areas: Area[];
   deleteResult: string;
 

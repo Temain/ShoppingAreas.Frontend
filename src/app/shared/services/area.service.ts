@@ -3,11 +3,13 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 
+import { AreaServiceModule } from '../modules/area-service.module';
+
 import { BaseService } from './common/base.service';
 import { Area } from '../models/area';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: AreaServiceModule
 })
 export class AreaService extends BaseService {
 

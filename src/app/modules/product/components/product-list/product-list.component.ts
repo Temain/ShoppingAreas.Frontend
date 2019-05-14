@@ -1,46 +1,48 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
-import { EquipmentService } from 'src/app/shared/services/equipment.service';
-import { Equipment } from 'src/app/shared/models/equipment';
+import { ProductService } from 'src/app/shared/services/product.service';
+import { Product } from 'src/app/shared/models/product';
 
 @Component({
-  selector: 'app-equipment-list',
-  templateUrl: './equipment-list.component.html',
-  styleUrls: ['./equipment-list.component.scss']
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.scss']
 })
-export class EquipmentListComponent implements OnInit {
-  equipments: Equipment[];
+export class ProductListComponent implements OnInit {
+  breadcombTitle = "Категории товаров";
+  breadcombText = "Список категорий товаров реализуемых на торговой площади";
+  products: Product[];
   deleteResult: string;
 
   constructor(
-    private equipmentService: EquipmentService,
+    private productService: ProductService,
     private modalService: NgbModal
   ) { }
 
   ngOnInit() {
-    this.equipmentService.getEquipments()
-      .subscribe(equipments => {
-        this.equipments = equipments;
+    this.productService.getProducts()
+      .subscribe(products => {
+        this.products = products;
       });
   }
 
-  confirmDelete(content, equipmentId) {
+  confirmDelete(content, productId) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-confirm-title'}).result.then((result) => {
-      this.deleteEquipment(equipmentId);
+      this.deleteProduct(productId);
       this.deleteResult = `Closed with: ${result}`;
     }, (reason) => {
       this.deleteResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
 
-  deleteEquipment(id) {
-    this.equipmentService.deleteEquipment(id)
+  deleteProduct(id) {
+    this.productService.deleteProduct(id)
       .subscribe(_ => {
-        const index = this.equipments
+        const index = this.products
           .map(x => x.id)
           .indexOf(id);
-        this.equipments.splice(index, 1);
+        this.products.splice(index, 1);
       }, response => {
         // this.errors = response.error;
         throw response;

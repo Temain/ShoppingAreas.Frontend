@@ -2,83 +2,81 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { AreaService } from 'src/app/shared/services/area.service';
-import { Area } from 'src/app/shared/models/area';
+import { ProductService } from 'src/app/shared/services/product.service';
+import { Product } from 'src/app/shared/models/product';
 
 @Component({
-  selector: 'app-area-edit',
-  templateUrl: './area-edit.component.html',
-  styleUrls: ['./area-edit.component.scss']
+  selector: 'app-product-edit',
+  templateUrl: './product-edit.component.html',
+  styleUrls: ['./product-edit.component.scss']
 })
-export class AreaEditComponent implements OnInit {
-  areaId: number;
-  area: Area;
+export class ProductEditComponent implements OnInit {
+  productId: number;
+  product: Product;
 
-  areaEditForm: FormGroup;
+  productEditForm: FormGroup;
   errors = '';
 
   constructor(
-    private areaService: AreaService,
+    private productService: ProductService,
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder) {
 
     this.route.params.subscribe(params => {
-      this.areaId = params.id;
+      this.productId = params.id;
     });
   }
 
   ngOnInit() {
     this.initForm();
 
-    this.areaService.getArea(this.areaId)
+    this.productService.getProduct(this.productId)
       .subscribe(response => {
-        this.area = response;
+        this.product = response;
 
         this.setValues();
       });
   }
 
   initForm() {
-    this.areaEditForm = this.formBuilder
+    this.productEditForm = this.formBuilder
       .group({
         id: [null],
-        name: [null, [Validators.required, Validators.maxLength(200)]],
-        address: [null, [Validators.required, Validators.maxLength(250)]]
+        name: [null, [Validators.required, Validators.maxLength(200)]]
       });
   }
 
   setValues() {
-    this.areaEditForm.patchValue({
-      id: this.area.id,
-      name: this.area.name,
-      address: this.area.address
+    this.productEditForm.patchValue({
+      id: this.product.id,
+      name: this.product.name
     });
   }
 
   isControlInvalid(controlName: string): boolean {
-    const control = this.areaEditForm.controls[controlName];
+    const control = this.productEditForm.controls[controlName];
     const result = control.invalid && control.touched;
     return result;
   }
 
   onSubmit(event: Event) {
     event.preventDefault();
-    const controls = this.areaEditForm.controls;
+    const controls = this.productEditForm.controls;
 
     // Validation
-    if (this.areaEditForm.invalid) {
+    if (this.productEditForm.invalid) {
       Object.keys(controls)
         .forEach(controlName => controls[controlName].markAsTouched());
       return;
     }
 
     /** Обработка данных формы */
-    this.area.name = this.areaEditForm.controls.name.value;
+    this.product.name = this.productEditForm.controls.name.value;
 
-    this.areaService.editArea(this.area)
+    this.productService.editProduct(this.product)
       .subscribe(_ => {
-        this.router.navigate(['/areas']);
+        this.router.navigate(['/products']);
       }, response => {
         this.errors = response.error;
         throw response;

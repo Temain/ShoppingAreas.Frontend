@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { AreaService } from 'src/app/shared/services/area.service';
-import { Area } from 'src/app/shared/models/area';
+import { EquipmentService } from 'src/app/shared/services/equipment.service';
+import { Equipment } from 'src/app/shared/models/equipment';
 
 @Component({
   selector: 'app-equipment-create',
@@ -11,16 +11,12 @@ import { Area } from 'src/app/shared/models/area';
   styleUrls: ['./equipment-create.component.scss']
 })
 export class EquipmentCreateComponent implements OnInit {
-
-  breadcombTitle = "Новая торговая площадь";
-  breadcombText = "Все поля формы обязательны для заполнения";
-
-  area: Area;
-  areaCreateForm: FormGroup;
+  equipment: Equipment;
+  equipmentCreateForm: FormGroup;
   errors = '';
 
   constructor(
-    private areaService: AreaService,
+    private equipmentService: EquipmentService,
     private router: Router,
     private formBuilder: FormBuilder) {
   }
@@ -30,38 +26,40 @@ export class EquipmentCreateComponent implements OnInit {
   }
 
   initForm() {
-    this.areaCreateForm = this.formBuilder
+    this.equipmentCreateForm = this.formBuilder
       .group({
         name: [null, [Validators.required, Validators.maxLength(200)]],
-        address: [null, [Validators.required, Validators.maxLength(250)]]
+        length: [null, [Validators.required]],
+        width: [null, [Validators.required]]
       });
   }
 
   isControlInvalid(controlName: string): boolean {
-    const control = this.areaCreateForm.controls[controlName];
+    const control = this.equipmentCreateForm.controls[controlName];
     const result = control.invalid && control.touched;
     return result;
   }
 
   onSubmit(event: Event) {
     event.preventDefault();
-    const controls = this.areaCreateForm.controls;
+    const controls = this.equipmentCreateForm.controls;
 
     // Validation
-    if (this.areaCreateForm.invalid) {
+    if (this.equipmentCreateForm.invalid) {
       Object.keys(controls)
         .forEach(controlName => controls[controlName].markAsTouched());
       return;
     }
 
     /** Обработка данных формы */
-    this.area = new Area();
-    this.area.name = this.areaCreateForm.controls.name.value;
-    this.area.address = this.areaCreateForm.controls.address.value;
+    this.equipment = new Equipment();
+    this.equipment.name = this.equipmentCreateForm.controls.name.value;
+    this.equipment.length = this.equipmentCreateForm.controls.length.value;
+    this.equipment.width = this.equipmentCreateForm.controls.width.value;
 
-    this.areaService.createArea(this.area)
+    this.equipmentService.createEquipment(this.equipment)
       .subscribe(_ => {
-        this.router.navigate(['/areas']);
+        this.router.navigate(['/equipments']);
       }, response => {
         debugger
         this.errors = response.error;
