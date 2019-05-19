@@ -14,23 +14,26 @@
               <tr>
                 <th>#</th>
                 <th>Наименование</th>
-                <th class="text-center">Ширина</th>
-                <th class="text-center">Длинна</th>
-                <th class="text-center">Площадь</th>
+                <th>S торг, кв.м.</th>
+                <th>S оборуд, кв.м.</th>
+                <th>S товаров, кв.м.</th>
+                <th>K уст.</th>
+                <th>K дем.</th>
                 <th class="text-right"></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let equip of equipments; let i = index">
+              <tr *ngFor="let report of reports; let i = index">
                 <th scope="row">{{ i + 1 }}</th>
-                <td class="align-middle">{{ equip.name }}</td>
-                <td class="text-center align-middle">{{ equip.width }}</td>
-                <td class="text-center align-middle">{{ equip.length }}</td>
-                <td class="text-center align-middle">{{ equip.length * equip.width | number : '1.2-2'}}</td>
+                <td class="align-middle">{{ report.name }}</td>
+                <td class="align-middle">{{ report.totalArea }}</td>
+                <td class="align-middle">{{ report.equipmentArea }}</td>
+                <td class="align-middle">{{ report.productArea }}</td>
+                <td class="align-middle">{{ report.coefInstall }}</td>
+                <td class="align-middle">{{ report.coefDemo }}</td>
                 <td class="text-right">
                   <div class="btn-group">
-                    <button [routerLink]="['/equipments', equip.id]" class="btn btn-primary notika-btn-primary waves-effect mr-2">Изменить</button>
-                    <button (click)="confirmDelete(content, equip.id)" class="btn btn-danger notika-btn-danger waves-effect">Удалить</button>
+                    <button [routerLink]="['/reports', report.id]" class="btn btn-primary notika-btn-primary waves-effect">Просмотр</button>               
                   </div>
                 </td>
               </tr>
@@ -52,7 +55,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p><strong>Вы действительно хотите удалить оборудование?</strong></p>
+        <p><strong>Вы действительно хотите удалить категорию?</strong></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default waves-effect" (click)="modal.dismiss('Cancel click')">Нет</button>

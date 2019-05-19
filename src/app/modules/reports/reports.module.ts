@@ -5,13 +5,16 @@ import { AreaCoeffsComponent } from './components/area-coeffs/area-coeffs.compon
 import { AuthGuard } from 'src/app/auth.guard';
 import { SharedModule } from 'src/app/shared/modules/shared.module';
 import { ReportsRouter } from './reports-routing.module';
+import { ReportsListComponent } from './components/reports-list/reports-list.component';
+import { ReportsServiceModule } from 'src/app/shared/modules/reports-service.module';
 
 @NgModule({
-  declarations: [ReportsComponent, AreaCoeffsComponent],
+  declarations: [ReportsComponent, AreaCoeffsComponent, ReportsListComponent],
   imports: [
     CommonModule,
     SharedModule,
-    ReportsRouter
+    ReportsRouter,
+    ReportsServiceModule
   ],
   providers: [AuthGuard]
 })

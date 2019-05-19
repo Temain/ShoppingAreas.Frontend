@@ -1,40 +1,79 @@
+<app-breadcomb></app-breadcomb>
+
 <div class="animation-area">
   <div class="container">
+    <!-- <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+          <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
+              <div class="website-traffic-ctn">
+                  <h2><span class="counter">50,000</span></h2>
+                  <p>Total Website Traffics</p>
+              </div>
+              <div class="sparkline-bar-stats1"><canvas width="58" height="36" style="display: inline-block; width: 58px; height: 36px; vertical-align: top;"></canvas></div>
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+          <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
+              <div class="website-traffic-ctn">
+                  <h2><span class="counter">90,000</span>k</h2>
+                  <p>Website Impressions</p>
+              </div>
+              <div class="sparkline-bar-stats2"><canvas width="58" height="36" style="display: inline-block; width: 58px; height: 36px; vertical-align: top;"></canvas></div>
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+          <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
+              <div class="website-traffic-ctn">
+                  <h2>$<span class="counter">40,000</span></h2>
+                  <p>Total Online Sales</p>
+              </div>
+              <div class="sparkline-bar-stats3"><canvas width="58" height="36" style="display: inline-block; width: 58px; height: 36px; vertical-align: top;"></canvas></div>
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+          <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
+              <div class="website-traffic-ctn">
+                  <h2><span class="counter">1,000</span></h2>
+                  <p>Total Support Tickets</p>
+              </div>
+              <div class="sparkline-bar-stats4"><canvas width="58" height="36" style="display: inline-block; width: 58px; height: 36px; vertical-align: top;"></canvas></div>
+          </div>
+      </div>
+    </div> -->
+
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="normal-table-list">
-          <h4>Коэффициент установочной площади</h4>
+          <h4>Коэффициент установочной площади:</h4>
 
           <h4>К<small>у</small> = S<small>об</small>/S<small>тз</small></h4>
           <p>
-            К<small>у</small> - коэффициент установочной площади,
             S<small>об</small> - площадь занятая оборудованием, 
             S<small>тз</small> - площадь торгового зала
           </p>
-          <h4>К<small>у</small> = 50 кв.м. / 200 кв.м. = 0.25</h4>
+          <h4>К<small>у</small> = {{ report.equipmentArea }} кв.м. / {{ report.totalArea }} кв.м. = {{ report.coefInstall | number: '1.2-2' }}</h4>
           <p>Норматив коэффициента - <strong>0.3</strong></p>
 
           <div class="alert alert-danger" role="alert">
             <h4>Необходимо дополнителльно установить оборудование:</h4>
-            <p>S<small>тз</small> * 0.3 - S<small>об</small> = <strong>10 кв.м.</strong></p>
+            <p>S<small>тз</small> * 0.3 - S<small>об</small> = <strong>{{ report.totalArea * 0.3 - report.equipmentArea | number: '1.2-2' }} кв.м.</strong></p>
           </div>
         </div>
 
         <div class="normal-table-list">
-          <h4>Коэффициент демонстационной площади</h4>
+          <h4>Коэффициент демонстационной площади:</h4>
 
           <h4>К<small>д</small> = S<small>вт</small>/S<small>тз</small></h4>
           <p>
-            К<small>д</small> - коэффициент демострационной площади,
             S<small>вт</small> - площадь выкладки товаров, 
             S<small>тз</small> - площадь торгового зала
           </p>
-          <h4>К<small>д</small> = 120 кв.м. / 200 кв.м. = 0.6</h4>
+          <h4>К<small>д</small> = {{ report.productArea }} кв.м. / {{ report.totalArea }} кв.м. = {{ report.coefDemo | number: '1.2-2' }}</h4>
           <p>Норматив коэффициента - <strong>0.75</strong></p>
 
           <div class="alert alert-danger" role="alert">
             <h4>Необходимо увеличить выкладку товаров:</h4>
-            <p>S<small>тз</small> * 0.75 - S<small>вт</small> = <strong>30 кв.м.</strong></p>
+            <p>S<small>тз</small> * 0.75 - S<small>вт</small> = <strong>{{ report.totalArea * 0.75 - report.productArea | number: '1.2-2' }} кв.м.</strong></p>
           </div>
         </div>
       </div>
