@@ -49,7 +49,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         result => {
           if (result) {
             debugger
-            this.router.navigate(['/']);
+            this.router.navigate(['/areas']);
           }
         },
         error => this.errors = error);

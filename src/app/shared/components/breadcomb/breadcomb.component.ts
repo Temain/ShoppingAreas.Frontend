@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-breadcomb',
@@ -8,16 +8,21 @@ import { Router } from '@angular/router';
 })
 export class BreadcombComponent implements OnInit {
   url: string;
+  id: number;
   title: string;
   text: string;
   iconClass: string;
   showCreate = false;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router, 
+    private route: ActivatedRoute) {
+      this.route.params.subscribe(params => {
+        this.id = params.id;
+      });
   }
 
   ngOnInit() {
-    debugger
     this.url = this.router.url;
     switch(this.url) {
       case '/areas': {
@@ -33,7 +38,7 @@ export class BreadcombComponent implements OnInit {
         this.iconClass = "notika-house";
         break;
       }
-      case '/areas/edit': {
+      case '/areas/' + this.id: {
         this.title = "Редактирование торговой площади";
         this.text = "Все поля обязательны для заполнения";
         this.iconClass = "notika-house";
@@ -46,6 +51,19 @@ export class BreadcombComponent implements OnInit {
         this.showCreate = true;
         break;
       }
+      case '/equipments/create': {
+        this.title = "Новое оборудование";
+        this.text = "Все поля обязательны для заполнения";
+        this.iconClass = "notika-app";
+        this.showCreate = true;
+        break;
+      }
+      case '/equipments/' + this.id: {
+        this.title = "Редактирование оборудования";
+        this.text = "Все поля обязательны для заполнения";
+        this.iconClass = "notika-house";
+        break;
+      }
       case '/products': {
         this.title = "Категории товаров";
         this.text = "Список категорий товаров реализуемых на торговой площади";
@@ -53,11 +71,24 @@ export class BreadcombComponent implements OnInit {
         this.showCreate = true;
         break;
       }
+      case '/products/create': {
+        this.title = "Новая категория товаров";
+        this.text = "Все поля обязательны для заполнения";
+        this.iconClass = "notika-app";
+        this.showCreate = true;
+        break;
+      }
+      case '/products/' + this.id: {
+        this.title = "Редактирование категории товаров";
+        this.text = "Все поля обязательны для заполнения";
+        this.iconClass = "notika-house";
+        break;
+      }
       case '/reports': {
         this.title = "Аналитика";
         this.text = "Результаты проведения оценки эффективности использования торговых помещений";
         this.iconClass = "notika-bar-chart";
-        this.showCreate = true;
+        this.showCreate = false;
         break;
       }
     }

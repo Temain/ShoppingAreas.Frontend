@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'areas', loadChildren: './modules/area/area.module#AreaModule' },
   { path: 'equipments', loadChildren: './modules/equipment/equipment.module#EquipmentModule' },
   { path: 'products', loadChildren: './modules/product/product.module#ProductModule' },
+  { path: 'reports', loadChildren: './modules/reports/reports.module#ReportsModule' },
   { path: '', loadChildren: './modules/account/account.module#AccountModule' },
 
   // otherwise redirect

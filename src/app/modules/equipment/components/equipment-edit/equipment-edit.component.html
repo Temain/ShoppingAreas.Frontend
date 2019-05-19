@@ -12,10 +12,10 @@
                 [ngClass]="{'form__field-error': isControlInvalid('name')}" class="form-control"
                 autocomplete="off" placeholder="Введите наименование..." />
               <div *ngIf="isControlInvalid('name')">
-                <div *ngIf="areaCreateForm.controls['name'].errors.required" class="form__error-text">
+                <div *ngIf="equipmentEditForm.controls['name'].errors.required" class="form__error-text">
                   Наименование обязательно для заполнения.
                 </div>
-                <div *ngIf="areaCreateForm.controls['name'].errors.maxlength" class="form__error-text">
+                <div *ngIf="equipmentEditForm.controls['name'].errors.maxlength" class="form__error-text">
                   Наименование должно быть длинной не более 200 символов.
                 </div>
               </div>
@@ -26,11 +26,11 @@
           <div class="form-group">
             <label>Ширина</label>
             <div class="nk-int-st">
-              <input type="text" id="length" formControlName="length"
+              <input type="number" id="length" formControlName="length"
                 [ngClass]="{'form__field-error': isControlInvalid('length')}" class="form-control"
                 autocomplete="off" placeholder="Введите наименование..." />
               <div *ngIf="isControlInvalid('length')">
-                <div *ngIf="areaCreateForm.controls['length'].errors.required" class="form__error-text">
+                <div *ngIf="equipmentEditForm.controls['length'].errors.required" class="form__error-text">
                   Ширина обязательна для заполнения.
                 </div>
               </div>
@@ -45,7 +45,7 @@
                 [ngClass]="{'form__field-error': isControlInvalid('width')}" class="form-control"
                 autocomplete="off" placeholder="Введите наименование..." />
               <div *ngIf="isControlInvalid('width')">
-                <div *ngIf="areaCreateForm.controls['width'].errors.required" class="form__error-text">
+                <div *ngIf="equipmentEditForm.controls['width'].errors.required" class="form__error-text">
                   Длинна обязательна для заполнения.
                 </div>
               </div>
