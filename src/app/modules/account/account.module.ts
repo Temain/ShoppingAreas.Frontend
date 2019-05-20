@@ -17,6 +17,6 @@ import { RegistrationFormComponent } from './components/registration-form/regist
     AccountRouter
   ],
   declarations: [AccountComponent, RegistrationFormComponent, LoginFormComponent],
-  providers: [UserService]
+  // providers: [UserService]
 })
 export class AccountModule { }

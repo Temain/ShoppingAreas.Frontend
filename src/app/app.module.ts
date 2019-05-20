@@ -39,8 +39,8 @@ import { AccountModule } from './modules/account/account.module';
       multi: true
     },
     {
-        provide: ErrorHandler,
-        useClass: ErrorHandlerService
+      provide: ErrorHandler,
+      useClass: ErrorHandlerService
     }
   ],
   bootstrap: [AppComponent]

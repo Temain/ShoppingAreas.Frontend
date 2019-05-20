@@ -1,0 +1,24 @@
+<app-breadcomb></app-breadcomb>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
+          <li [routerLinkActive]="['active']">
+            <a data-toggle="tab" [routerLink]="['/reports', areaId, 'area']" aria-expanded="true">
+              <i class="notika-icon notika-house"></i> 
+              Коэффициенты
+            </a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a data-toggle="tab" [routerLink]="['/reports', areaId, 'products']" aria-expanded="false">
+              <i class="notika-icon notika-mail"></i> 
+              Категории товаров
+            </a>
+          </li>
+        </ul>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

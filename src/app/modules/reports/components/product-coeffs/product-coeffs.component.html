@@ -1,0 +1,50 @@
+<div class="animation-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="normal-table-list">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Категория</th>
+                <th>Оборот</th>
+                <th>Доля в обороте, %</th>
+                <th>Прибыль</th>
+                <th>Доля в прибыли, %</th>
+                <th>Доля в площади, %</th>
+                <th>K <small>эо</small></th>
+                <th>K <small>эп</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let report of reports; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ report.name }}</td>
+                <td>{{ report.income }}</td>
+                <td>{{ report.incomePercent }}</td>
+                <td>{{ report.profit }}</td>
+                <td>{{ report.profitPercent }}</td>
+                <td>{{ report.areaPercent }}</td>
+                <td>{{ report.coefIncome }}</td>
+                <td>{{ report.coefProfit }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div>
+            <div style="display: block">
+              <canvas baseChart
+                      [datasets]="barChartData"
+                      [labels]="barChartLabels"
+                      [options]="barChartOptions"
+                      [legend]="barChartLegend"
+                      [chartType]="barChartType">
+              </canvas>
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

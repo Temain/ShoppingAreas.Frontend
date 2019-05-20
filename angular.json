@@ -43,7 +43,8 @@
               "node_modules/jquery/dist/jquery.js",
               "src/assets/js/wave/waves.min.js",
               "src/assets/js/wave/wave-active.js",
-              "src/assets/js/main.js"
+              "src/assets/js/main.js",
+              "node_modules/chart.js/dist/chart.js"
             ],
             "es5BrowserSupport": true
           },
@@ -115,7 +116,8 @@
               "node_modules/jquery/dist/jquery.js",
               "src/assets/js/wave/waves.min.js",
               "src/assets/js/wave/wave-active.js",
-              "src/assets/js/main.js"
+              "src/assets/js/main.js",
+              "node_modules/chart.js/dist/chart.js"
             ],
             "assets": [
               "src/favicon.ico",

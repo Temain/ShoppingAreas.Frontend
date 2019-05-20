@@ -9,7 +9,9 @@ import { environment } from '../../../../environments/environment';
 import { UserRegistration } from '../../models/user.registration';
 import { User } from '../../models/user';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class UserService extends BaseService {
 
   baseUrl = '';

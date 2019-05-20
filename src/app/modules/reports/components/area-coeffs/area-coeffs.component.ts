@@ -12,19 +12,19 @@ import { AreaReport } from 'src/app/shared/models/area.report';
 export class AreaCoeffsComponent implements OnInit {
 
   areaId: number;
-  report: AreaReport;
+  report: AreaReport = new AreaReport();
 
   constructor(
     private reportsService: ReportsService,
     private route: ActivatedRoute
   ) { 
-    this.route.params.subscribe(params => {
+    this.route.parent.params.subscribe(params => {
       this.areaId = params.id;
     });
   }
 
   ngOnInit() {
-    this.reportsService.getReport(this.areaId)
+    this.reportsService.getAreaReport(this.areaId)
       .subscribe(response => {
         this.report = response;
       });

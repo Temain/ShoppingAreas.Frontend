@@ -91,9 +91,16 @@ export class BreadcombComponent implements OnInit {
         this.showCreate = false;
         break;
       }
-      case '/reports/' + this.id: {
+      case '/reports/' + this.id + '/area': {
         this.title = "Аналитика";
         this.text = "Результаты проведения оценки эффективности использования торговых помещений";
+        this.iconClass = "notika-bar-chart";
+        this.showCreate = false;
+        break;
+      }
+      case '/reports/' + this.id + '/products': {
+        this.title = "Аналитика";
+        this.text = "Результаты проведения оценки эффективности использования площадей под товары";
         this.iconClass = "notika-bar-chart";
         this.showCreate = false;
         break;
