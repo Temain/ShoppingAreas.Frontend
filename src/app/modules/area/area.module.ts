@@ -11,9 +11,11 @@ import { AuthGuard } from 'src/app/auth.guard';
 import { AreaListComponent } from './components/area-list/area-list.component';
 import { AreaEditComponent } from './components/area-edit/area-edit.component';
 import { AreaCreateComponent } from './components/area-create/area-create.component';
+import { AreaEquipmentComponent } from './components/area-equipment/area-equipment.component';
+import { AreaProductComponent } from './components/area-product/area-product.component';
 
 @NgModule({
-  declarations: [AreaComponent, AreaListComponent, AreaEditComponent, AreaCreateComponent],
+  declarations: [AreaComponent, AreaListComponent, AreaEditComponent, AreaCreateComponent, AreaEquipmentComponent, AreaProductComponent],
   imports: [
     CommonModule,
     AreaRouter,

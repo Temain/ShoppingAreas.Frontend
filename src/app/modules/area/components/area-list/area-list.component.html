@@ -29,12 +29,12 @@
             <div class="row mg-t-10">
               <div class="col-lg-6">
                 <div class="animation-btn">
-                  <button class="btn btn-warning notika-btn-warning full-width waves-effect">Обрудование</button>
+                  <button [routerLink]="['/areas', area.id, 'equipment']" class="btn btn-warning notika-btn-warning full-width waves-effect">Обрудование</button>
                 </div>
               </div>
               <div class="col-lg-6">
                 <div class="animation-btn sm-res-mg-t-10 tb-res-mg-t-10 dk-res-mg-t-10">
-                  <button class="btn btn-info notika-btn-info full-width waves-effect">Товары</button>
+                  <button [routerLink]="['/areas', area.id, 'product']" class="btn btn-info notika-btn-info full-width waves-effect">Товары</button>
                 </div>
               </div>
             </div>
