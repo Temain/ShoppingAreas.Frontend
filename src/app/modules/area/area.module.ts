@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AreaComponent } from './pages/area.component';
 import { AreaRouter } from './area-routing.module'
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { SharedModule } from 'src/app/shared/modules/shared.module';
 import { AreaServiceModule } from 'src/app/shared/modules/area-service.module';
@@ -13,6 +14,7 @@ import { AreaEditComponent } from './components/area-edit/area-edit.component';
 import { AreaCreateComponent } from './components/area-create/area-create.component';
 import { AreaEquipmentComponent } from './components/area-equipment/area-equipment.component';
 import { AreaProductComponent } from './components/area-product/area-product.component';
+import { EquipmentServiceModule } from 'src/app/shared/modules/equipment-service.module';
 
 @NgModule({
   declarations: [AreaComponent, AreaListComponent, AreaEditComponent, AreaCreateComponent, AreaEquipmentComponent, AreaProductComponent],
@@ -21,7 +23,10 @@ import { AreaProductComponent } from './components/area-product/area-product.com
     AreaRouter,
     ReactiveFormsModule,
     SharedModule,
-    AreaServiceModule
+    AreaServiceModule,
+    FormsModule,
+    DragDropModule,
+    EquipmentServiceModule
   ],
   providers: [AuthGuard]
 })

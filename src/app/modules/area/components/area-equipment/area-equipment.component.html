@@ -1,13 +1,24 @@
-<app-breadcomb></app-breadcomb>
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <form [formGroup]="areaEquipmentForm" (submit)="onSubmit($event)" class="form-example-wrap" novalidate>
-        <div class="form-example-int">
-          dfgdfg
-        </div>
-      </form>
+<div style="display: flex">
+  <div cdkDropList 
+    [cdkDropListData]="selected" 
+    [cdkDropListConnectedTo]="secondList" 
+    #firstList="cdkDropList"
+    (cdkDropListDropped)="drop($event)" 
+    style="width: 30%">
+    <div *ngFor="let equip of selected" class="pop" cdkDrag>
+      <div>{{equip.name}}</div>
+      <div>
+        <input type="number" />
+      </div>
+    </div>
+  </div>
+  <div cdkDropList 
+    [cdkDropListData]="equipment" 
+    [cdkDropListConnectedTo]="firstList" 
+    #secondList="cdkDropList"
+    (cdkDropListDropped)="drop($event)" style="width: 30%">
+    <div *ngFor="let equip of equipment" class="pop" cdkDrag>
+      <div>{{equip.name}}</div>
     </div>
   </div>
 </div>

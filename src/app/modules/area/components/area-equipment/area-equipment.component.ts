@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { CdkDragDrop, transferArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AreaService } from 'src/app/shared/services/area.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EquipmentService } from 'src/app/shared/services/equipment.service';
+import { Equipment } from 'src/app/shared/models/equipment';
+
+export interface Todo {
+  title: string;
+  date: string;
+  poster : string;
+}
 
 @Component({
   selector: 'app-area-equipment',
@@ -11,15 +19,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AreaEquipmentComponent implements OnInit {
 
   areaId: number;
-
-  areaEquipmentForm: FormGroup;
-  errors = '';
+  equipment: Equipment[] = [];
+  selected: Equipment[] = [];
 
   constructor(
-    private areaService: AreaService,
     private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder) { 
+    private areaService: AreaService,
+    private equipmentService: EquipmentService) {
 
     this.route.params.subscribe(params => {
       this.areaId = params.id;
@@ -27,15 +34,18 @@ export class AreaEquipmentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initForm();
+    this.equipmentService.getEquipments()
+      .subscribe(response => {
+        this.equipment = response;
+      })
   }
-
-  initForm() {
-    this.areaEquipmentForm = this.formBuilder
-      .group({
-        id: [null],
-        name: [null, [Validators.required, Validators.maxLength(200)]],
-        address: [null, [Validators.required, Validators.maxLength(250)]]
-      });
+  
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer !== event.container) {
+      transferArrayItem(event.previousContainer.data,event.container.data, 
+        event.previousIndex, event.currentIndex)
+    } else {
+      moveItemInArray(this.selected, event.previousIndex, event.currentIndex);
+    }
   }
 }
