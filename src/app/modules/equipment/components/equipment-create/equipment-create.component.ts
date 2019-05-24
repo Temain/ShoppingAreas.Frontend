@@ -61,7 +61,6 @@ export class EquipmentCreateComponent implements OnInit {
       .subscribe(_ => {
         this.router.navigate(['/equipments']);
       }, response => {
-        debugger
         this.errors = response.error;
         throw response;
       });

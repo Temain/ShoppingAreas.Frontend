@@ -1,5 +1,5 @@
 export class Equipment {
-  id: number;
+  id: string;
   name: string;
   length: number;
   width: number;

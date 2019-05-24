@@ -15,7 +15,7 @@ export abstract class BaseService {
     }
 
     let modelStateErrors = '';
-    const serverError = error.json();
+    const serverError = error.error;
 
     if (!serverError.type) {
       for (const key in serverError) {

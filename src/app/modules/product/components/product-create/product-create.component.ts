@@ -57,7 +57,6 @@ export class ProductCreateComponent implements OnInit {
       .subscribe(_ => {
         this.router.navigate(['/products']);
       }, response => {
-        debugger
         this.errors = response.error;
         throw response;
       });

@@ -59,7 +59,6 @@ export class AreaCreateComponent implements OnInit {
       .subscribe(_ => {
         this.router.navigate(['/areas']);
       }, response => {
-        debugger
         this.errors = response.error;
         throw response;
       });

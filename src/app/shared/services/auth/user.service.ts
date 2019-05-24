@@ -63,7 +63,6 @@ export class UserService extends BaseService {
       .pipe(
         // map(res => res.json()),
         map((user: User) => {
-          debugger
           localStorage.setItem('auth_token', user.auth_token);
           localStorage.setItem('user', JSON.stringify(user));
           this.loggedIn = true;

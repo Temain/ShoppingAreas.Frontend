@@ -1,24 +1,44 @@
-<div style="display: flex">
-  <div cdkDropList 
-    [cdkDropListData]="selected" 
-    [cdkDropListConnectedTo]="secondList" 
-    #firstList="cdkDropList"
-    (cdkDropListDropped)="drop($event)" 
-    style="width: 30%">
-    <div *ngFor="let equip of selected" class="pop" cdkDrag>
-      <div>{{equip.name}}</div>
-      <div>
-        <input type="number" />
+<app-breadcomb></app-breadcomb>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+      <div class="double-list">
+        <div class="contact-hd dialog-hd">
+          <h2>Оборудование</h2>
+          <p>Перетащите в этот список, укажите количество</p>
+        </div>
+        <div cdkDropList 
+          [cdkDropListData]="selected" 
+          [cdkDropListConnectedTo]="secondList" 
+          #firstList="cdkDropList"
+          (cdkDropListDropped)="drop($event, 'left')">
+          <div *ngFor="let equip of selected" class="item-left" cdkDrag>
+            <div>{{equip.equipmentName}} {{ equip.length }}м x {{ equip.width }}м</div>
+            <div class="item-left__input">
+              <input type="number" [(ngModel)]="equip.count" (change)="onChange(equip)" class="form-control input-sm" />
+              <div class="item-left__input-addon">шт.</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div cdkDropList 
-    [cdkDropListData]="equipment" 
-    [cdkDropListConnectedTo]="firstList" 
-    #secondList="cdkDropList"
-    (cdkDropListDropped)="drop($event)" style="width: 30%">
-    <div *ngFor="let equip of equipment" class="pop" cdkDrag>
-      <div>{{equip.name}}</div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+      <div class="double-list">
+        <div class="contact-hd dialog-hd">
+            <h2>Весь список</h2>
+            <p>Перетащите из этого списка</p>
+        </div>
+        <div cdkDropList 
+          [cdkDropListData]="equipment" 
+          [cdkDropListConnectedTo]="firstList" 
+          #secondList="cdkDropList"
+          (cdkDropListDropped)="drop($event, 'right')">
+          <div *ngFor="let equip of equipment" class="item-right" cdkDrag>
+            <div>{{equip.equipmentName}} {{ equip.length }}м x {{ equip.width }}м</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
