@@ -50,7 +50,7 @@ export class BreadcombComponent implements OnInit {
         this.iconClass = "notika-house";
         break;
       }
-      case '/areas/' + this.id + '/products': {
+      case '/areas/' + this.id + '/product': {
         this.title = "Реализуемые категории товаров на торговой площади";
         this.text = "Перетащите категории товаров из общего списка и укажите количество";
         this.iconClass = "notika-house";

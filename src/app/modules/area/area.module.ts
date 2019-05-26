@@ -15,9 +15,18 @@ import { AreaCreateComponent } from './components/area-create/area-create.compon
 import { AreaEquipmentComponent } from './components/area-equipment/area-equipment.component';
 import { AreaProductComponent } from './components/area-product/area-product.component';
 import { EquipmentServiceModule } from 'src/app/shared/modules/equipment-service.module';
+import { SafeHtmlPipe } from 'src/app/shared/pipes/safe-html.pipe';
 
 @NgModule({
-  declarations: [AreaComponent, AreaListComponent, AreaEditComponent, AreaCreateComponent, AreaEquipmentComponent, AreaProductComponent],
+  declarations: [
+    AreaComponent, 
+    AreaListComponent, 
+    AreaEditComponent, 
+    AreaCreateComponent, 
+    AreaEquipmentComponent, 
+    AreaProductComponent,
+    SafeHtmlPipe
+  ],
   imports: [
     CommonModule,
     AreaRouter,

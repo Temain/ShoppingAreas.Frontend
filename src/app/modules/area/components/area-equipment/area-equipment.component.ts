@@ -19,10 +19,8 @@ export class AreaEquipmentComponent implements OnInit {
   selected: EquipmentArea[] = [];
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
-    private areaService: AreaService,
-    private equipmentService: EquipmentService) {
+    private areaService: AreaService) {
 
     this.route.params.subscribe(params => {
       this.areaId = params.id;
@@ -44,7 +42,7 @@ export class AreaEquipmentComponent implements OnInit {
         this.selected = response;
       });
   }
-
+ 
   onChange(equipArea) {
     this.areaService.editEquipmentArea(this.areaId, equipArea.equipmentId, equipArea)
       .subscribe(response => {});

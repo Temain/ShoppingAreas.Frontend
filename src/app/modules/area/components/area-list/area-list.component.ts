@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from 'src/environments/environment';
 
 import { AreaService } from 'src/app/shared/services/area.service';
 import { Area } from 'src/app/shared/models/area';
@@ -12,11 +13,12 @@ import { Area } from 'src/app/shared/models/area';
 export class AreaListComponent implements OnInit {
   areas: Area[];
   deleteResult: string;
+  rootUri = environment.rootUri;
 
   constructor(
     private areaService: AreaService,
     private modalService: NgbModal
-  ) { }
+  ) {  }
 
   ngOnInit() {
     this.areaService.getAreas()

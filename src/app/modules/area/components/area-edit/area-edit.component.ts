@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AreaService } from 'src/app/shared/services/area.service';
 import { Area } from 'src/app/shared/models/area';
+import { FileEntity } from 'src/app/shared/models/file-entity';
 
 @Component({
   selector: 'app-area-edit',
@@ -15,6 +16,10 @@ export class AreaEditComponent implements OnInit {
   area: Area;
 
   areaEditForm: FormGroup;
+
+  imageData: string;
+  @ViewChild('imageInput') imageInput: ElementRef;
+
   errors = '';
 
   constructor(
@@ -44,7 +49,9 @@ export class AreaEditComponent implements OnInit {
       .group({
         id: [null],
         name: [null, [Validators.required, Validators.maxLength(200)]],
-        address: [null, [Validators.required, Validators.maxLength(250)]]
+        address: [null, [Validators.required, Validators.maxLength(250)]],
+        imagePath: [null],
+        imageData: [null]
       });
   }
 
@@ -52,14 +59,42 @@ export class AreaEditComponent implements OnInit {
     this.areaEditForm.patchValue({
       id: this.area.id,
       name: this.area.name,
-      address: this.area.address
+      address: this.area.address,
+      imagePath: this.area.imagePath
     });
+
+    this.imageData = this.area && this.area.image
+      ? this.area.image.fileData : '';
   }
 
   isControlInvalid(controlName: string): boolean {
     const control = this.areaEditForm.controls[controlName];
     const result = control.invalid && control.touched;
     return result;
+  }
+
+  onImageChange(event) {
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length > 0) {
+        const file = event.target.files[0];
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            const imageData = reader.result.toString();
+            this.imageData = imageData;
+            this.areaEditForm.get('imageData')
+                .setValue({
+                    fileName: file.name,
+                    fileType: file.type,
+                    fileData: imageData
+                });
+        };
+    }
+  }
+
+  clearImage() {
+    this.areaEditForm.get('imageData').setValue(null);
+    this.imageInput.nativeElement.value = '';
+    this.imageData = '';
   }
 
   onSubmit(event: Event) {
@@ -75,6 +110,15 @@ export class AreaEditComponent implements OnInit {
 
     /** Обработка данных формы */
     this.area.name = this.areaEditForm.controls.name.value;
+    this.area.address = this.areaEditForm.controls.address.value;
+    this.area.imagePath = this.areaEditForm.controls['imagePath'].value;
+
+    const image = this.areaEditForm.controls['imageData'].value;
+    if (image) {
+        this.area.image = new FileEntity(image.fileName, image.fileType, image.fileData.split(',')[1]);
+    } else {
+        this.area.image = null;
+    }
 
     this.areaService.editArea(this.area)
       .subscribe(_ => {

@@ -1,3 +1,62 @@
-<p>
-  area-product works!
-</p>
+<app-breadcomb></app-breadcomb>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+      <div class="double-list">
+        <div class="contact-hd dialog-hd">
+          <h2>Категории товаров</h2>
+          <p>Перетащите в этот список, укажите параметры</p>
+        </div>
+        <div cdkDropList 
+          [cdkDropListData]="selected" 
+          [cdkDropListConnectedTo]="secondList" 
+          #firstList="cdkDropList"
+          (cdkDropListDropped)="drop($event, 'left')">
+          <div *ngFor="let product of selected" class="item-left" cdkDrag>
+            <div class="item-left__title">
+              <div>{{ product.productName }}</div>
+            </div>
+            <div class="item-left__input">
+              <div class="item-left__input-label">Длинна: </div>
+              <input type="number" [(ngModel)]="product.length" (change)="onChange(product)" class="form-control input-sm" />
+              <div class="item-left__input-addon">м.</div>
+            </div>
+            <div class="item-left__input">
+              <div class="item-left__input-label">Ширина: </div>
+              <input type="number" [(ngModel)]="product.width" (change)="onChange(product)" class="form-control input-sm" />
+              <div class="item-left__input-addon">м.</div>
+            </div>
+            <div class="item-left__input">
+              <div class="item-left__input-label">Оборот: </div>
+              <input type="number" [(ngModel)]="product.income" (change)="onChange(product)" class="form-control input-sm" />
+              <div class="item-left__input-addon">тыс.руб.</div>
+            </div>
+            <div class="item-left__input">  
+              <div class="item-left__input-label">Прибыль: </div>
+              <input type="number" [(ngModel)]="product.profit" (change)="onChange(product)" class="form-control input-sm" />
+              <div class="item-left__input-addon">тыс.руб.</div>                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+      <div class="double-list">
+        <div class="contact-hd dialog-hd">
+            <h2>Весь список</h2>
+            <p>Перетащите из этого списка</p>
+        </div>
+        <div cdkDropList 
+          [cdkDropListData]="products" 
+          [cdkDropListConnectedTo]="firstList" 
+          #secondList="cdkDropList"
+          (cdkDropListDropped)="drop($event, 'right')">
+          <div *ngFor="let product of products" class="item-right" cdkDrag>
+            <div>{{ product.productName }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

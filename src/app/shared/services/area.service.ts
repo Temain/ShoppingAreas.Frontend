@@ -81,7 +81,7 @@ export class AreaService extends BaseService {
       return this.http.post<EquipmentArea>(uri, body, httpOptions);
     }
 
-    editEquipmentArea(areaId: string, equipmentId: string, equipArea: EquipmentArea): Observable<Area> {
+    editEquipmentArea(areaId: string, equipmentId: string, equipArea: EquipmentArea): Observable<EquipmentArea> {
       const body = JSON.stringify(equipArea);
       let params = new HttpParams();
       params = params.set('areaId', areaId);
@@ -94,7 +94,7 @@ export class AreaService extends BaseService {
       };
 
       const uri = environment.apiUri + '/equipmentsarea/';
-      return this.http.put<Area>(uri, body, httpOptions);
+      return this.http.put<EquipmentArea>(uri, body, httpOptions);
     }
 
     deleteEquipmentArea(areaId: string, id: string): Observable<EquipmentArea> {
@@ -105,9 +105,12 @@ export class AreaService extends BaseService {
       return this.http.delete<EquipmentArea>(uri, { params });
     }
 
-    getProductArea(areaId: string): Observable<ProductArea[]> {
+    getProductArea(areaId: string, all: boolean): Observable<ProductArea[]> {
       let params = new HttpParams();
-      params = params.set('areaId', areaId);
+      if (areaId) {
+        params = params.set('areaId', areaId);
+      }
+      params = params.set('all', all.toString());
       return this.http.get<ProductArea[]>(this.apiUri + '/productsarea', { params });
     }
 
@@ -122,8 +125,27 @@ export class AreaService extends BaseService {
       return this.http.post<ProductArea>(uri, body, httpOptions);
     }
 
-    deleteProductArea(id: string): Observable<ProductArea> {
-      const uri = environment.apiUri + '/productsarea/' + id;
-      return this.http.delete<ProductArea>(uri);
+    editProductArea(areaId: string, productId: string, productArea: ProductArea): Observable<ProductArea> {
+      const body = JSON.stringify(productArea);
+      let params = new HttpParams();
+      params = params.set('areaId', areaId);
+      params = params.set('productId', productId);
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }),
+        params
+      };
+
+      const uri = environment.apiUri + '/productsarea/';
+      return this.http.put<ProductArea>(uri, body, httpOptions);
+    }
+
+    deleteProductArea(areaId: string, id: string): Observable<ProductArea> {
+      let params = new HttpParams();
+      params = params.set('areaId', areaId);
+      params = params.set('productId', id);
+      const uri = environment.apiUri + '/productsarea';
+      return this.http.delete<ProductArea>(uri, { params });
     }
 }

@@ -41,6 +41,27 @@
             </div>
           </div>
         </div>
+        <div class="form-example-int">
+          <div class="form-group">
+            <label>Изображение</label>
+            <div class="nk-int-st">
+              <div class="product-edit__form-group">
+                <div class="input-group product-edit__form-input-group">
+                  <span class="input-group-addon product-edit__form-addon">
+                    <span class="input-text">Файл</span>
+                  </span>
+                  <input type="file" id="imageData" (change)="onImageChange($event)" class="form-control hidden" accept="image/*" #imageInput>
+                  <button type="button" (click)="imageInput.click()" class="btn btn-custom">Выбрать файл</button> 
+                </div>
+                <div *ngIf="isControlInvalid('imageData')" class="product-edit__error">
+                  Необходимо загрузить изображение.
+                </div>
+              </div>
+  
+              <img *ngIf="imageData" [src]="imageData | safeHtml" height="200" alt="Предпросмотр изображения...">
+            </div>
+          </div>
+        </div>
         <div class="form-example-int mg-t-15">
           <div *ngIf="errors" class="alert alert-danger" role="alert">
             {{errors.message}}

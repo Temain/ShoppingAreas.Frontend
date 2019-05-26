@@ -11,7 +11,8 @@
             <p>Площадь: {{ area.totalArea }} кв.м.</p>
           </div>
           <div class="animation-img mg-b-15">
-            <img class="animate-one" src="/assets/img/widgets/2.png" alt="" />
+            <img [src]="rootUri + area.imagePath" alt="item1" class="item-image">
+            <!-- <img class="animate-one" src="/assets/img/widgets/2.png" alt="" /> -->
           </div>
           <div class="animation-action">
             <div class="row">

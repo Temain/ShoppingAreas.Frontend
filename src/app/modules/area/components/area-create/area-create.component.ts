@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AreaService } from 'src/app/shared/services/area.service';
 import { Area } from 'src/app/shared/models/area';
+import { FileEntity } from 'src/app/shared/models/file-entity';
 
 @Component({
   selector: 'app-area-create',
@@ -14,6 +15,9 @@ export class AreaCreateComponent implements OnInit {
   area: Area;
   areaCreateForm: FormGroup;
   errors = '';
+
+  imageData: string;
+  @ViewChild('imageInput') imageInput: ElementRef;
 
   constructor(
     private areaService: AreaService,
@@ -29,7 +33,9 @@ export class AreaCreateComponent implements OnInit {
     this.areaCreateForm = this.formBuilder
       .group({
         name: [null, [Validators.required, Validators.maxLength(200)]],
-        address: [null, [Validators.required, Validators.maxLength(250)]]
+        address: [null, [Validators.required, Validators.maxLength(250)]],
+        imagePath: [null],
+        imageData: [null]
       });
   }
 
@@ -37,6 +43,30 @@ export class AreaCreateComponent implements OnInit {
     const control = this.areaCreateForm.controls[controlName];
     const result = control.invalid && control.touched;
     return result;
+  }
+
+  onImageChange(event) {
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length > 0) {
+        const file = event.target.files[0];
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            const imageData = reader.result.toString();
+            this.imageData = imageData;
+            this.areaCreateForm.get('imageData')
+                .setValue({
+                    fileName: file.name,
+                    fileType: file.type,
+                    fileData: imageData
+                });
+        };
+    }
+  }
+
+  clearImage() {
+    this.areaCreateForm.get('imageData').setValue(null);
+    this.imageInput.nativeElement.value = '';
+    this.imageData = '';
   }
 
   onSubmit(event: Event) {
@@ -54,6 +84,14 @@ export class AreaCreateComponent implements OnInit {
     this.area = new Area();
     this.area.name = this.areaCreateForm.controls.name.value;
     this.area.address = this.areaCreateForm.controls.address.value;
+    this.area.imagePath = this.areaCreateForm.controls['imagePath'].value;
+
+    const image = this.areaCreateForm.controls['imageData'].value;
+    if (image) {
+        this.area.image = new FileEntity(image.fileName, image.fileType, image.fileData.split(',')[1]);
+    } else {
+        this.area.image = null;
+    }
 
     this.areaService.createArea(this.area)
       .subscribe(_ => {
